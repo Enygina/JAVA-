@@ -9,7 +9,9 @@ public class Main {
 //        ex2();
 //        hwEx1();
 //        hwEx2();
-        hwEx3();
+//        hwEx3();
+
+
 
     }
 
@@ -96,6 +98,7 @@ public class Main {
 
 
     }
+
     private static void hwEx3() {
 
 // Дан массив nums = [3,2,2,3] и число val = 3.
@@ -109,23 +112,27 @@ public class Main {
         for (int i = 0; i < array.length; i++) {
             array[i] = random.nextInt(1, 5);
         }
-        int right = array.length-1;
+        int right = array.length - 1;
         int left = 0;
 
-        System.out.printf("Заданный массив"+Arrays.toString(array));
-        while (left <=right){
-        if (array[left] == val & array[right] != val) {
-            array[left] = array[right];
-            array[right] = val;
-            left++;
-            right--;
-        }if (array[left] == val) {
-            right++;
-        }if (array[right] == val){
-            right--;
-        }else {left++;}
+        System.out.printf("Заданный массив" + Arrays.toString(array));
+        while (left <= right) {
+            if (array[left] == val & array[right] != val) {
+                array[left] = array[right];
+                array[right] = val;
+                left++;
+                right--;
+            }
+            if (array[left] == val) {
+                right++;
+            }
+            if (array[right] == val) {
+                right--;
+            } else {
+                left++;
+            }
         }
-        System.out.printf("Отсортированный массив"+Arrays.toString(array));
+        System.out.printf("Отсортированный массив" + Arrays.toString(array));
     }
 }
 
