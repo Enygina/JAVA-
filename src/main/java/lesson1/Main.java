@@ -90,6 +90,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите год: ");
         int year = scanner.nextInt();
+        scanner.close();
 //        boolean leapYearChec = year % 400 == 0 | year%100!=0 &year%4==0;
 //        System.out.printf((leapYearChec)? year+" год - високосный":year+" год - не високосный";
 // Вариант 2:
