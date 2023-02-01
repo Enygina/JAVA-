@@ -1,6 +1,5 @@
 package lesson1;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
@@ -54,11 +53,9 @@ public class Main {
         System.out.println("Максимальная серия единиц: " + Math.max(count, maxCount));
     }
 
-
+    // Задать одномерный массив и найти в нем минимальный и максимальный элементы
     private static void hwEx1() {
-
-// Задать одномерный массив и найти в нем минимальный и максимальный элементы
-
+        
         int[] oneDimensArray = new int[20];
         Random random = new Random();
 
@@ -66,38 +63,63 @@ public class Main {
             oneDimensArray[i] = random.nextInt(1, 20);
         }
         System.out.println(Arrays.toString(oneDimensArray));
-//
-//  Вариант 1:
-//        Arrays.sort(oneDimensArray);
-//        int min = oneDimensArray[0];
-//        int max = oneDimensArray[oneDimensArray.length-1];
-//
-//  Вариант 2:
-        int min = Arrays.stream(oneDimensArray).min().getAsInt();
-        int max = Arrays.stream(oneDimensArray).max().getAsInt();
-
-        System.out.printf("Максимальное число в массиве - " + max + " , минимальное - " + min);
-
+        
+//        System.out.printf("Максимальное число в массиве - " + (findMinMaxByStats(oneDimensArray)[1]) + " , минимальное - " + (findMinMaxByStats(oneDimensArray)[0]));
+        System.out.printf("Максимальное число в массиве - " + (findMinMaxByStream(oneDimensArray)[1]) + " , минимальное - " + (findMinMaxByStream(oneDimensArray)[0]));
     }
 
-    private static void hwEx2() {
+    private static int[] findMinMaxByStream(int[] arr) {
+        int min = Arrays.stream(arr).min().getAsInt();
+        int max = Arrays.stream(arr).max().getAsInt();
+        int[] minMax = new int[]{min, max};
+        return minMax;
+    }
+
+    private static int[] findMinMaxByStats(int[] arr) {
+        IntSummaryStatistics stats = Arrays.stream(arr).summaryStatistics();
+
+        int max = stats.getMax();
+        int min = stats.getMin();
+        int[] minMax = new int[]{min, max};
+        return minMax;
+    }
 
 //        Написать метод, который определяет, является ли год високосным, и возвращает boolean
 //        (високосный - true, не високосный - false). Каждый 4-й год является високосным, кроме
 //        каждого 100-го, при этом каждый 400-й – високосный.
+    private static void hwEx2() {
 
 // Вариант 1:
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите год: ");
+        int n = -1;
+        do {
+            System.out.print("Введите натуральное число: ");
+
+            try {
+                n = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Ошибка! ");
+            }
+
+        } while (n <= 0);
+
+
         int year = scanner.nextInt();
         scanner.close();
-//        boolean leapYearChec = year % 400 == 0 | year%100!=0 &year%4==0;
-//        System.out.printf((leapYearChec)? year+" год - високосный":year+" год - не високосный";
-// Вариант 2:
+
+        leapYearCheck(year);
+        IsLeapYearByGregorianCalendar(year);
+    }
+
+    private static void leapYearCheck(int year) {
+        boolean leapYearCheck = year % 400 == 0 || year %100!=0 & year %4==0;
+        System.out.printf((leapYearCheck)? year +" год - високосный": year +" год - не високосный");
+    }
+
+    private static void IsLeapYearByGregorianCalendar(int year) {
         GregorianCalendar checYear = new GregorianCalendar();
         System.out.println((checYear.isLeapYear(year)) ? year + " год - високосный" : year + " год - не високосный");
-
-
     }
 
     private static void hwEx3() {
@@ -118,22 +140,18 @@ public class Main {
 
         System.out.printf("Заданный массив" + Arrays.toString(array));
         while (left <= right) {
-            if (array[left] == val & array[right] != val) {
+            if (array[left] == val && array[right] != val) {
                 array[left] = array[right];
                 array[right] = val;
                 left++;
                 right--;
-            }
-            if (array[left] == val) {
-                right++;
-            }
-            if (array[right] == val) {
+            } else if (array[left] == val) {
                 right--;
-            } else {
-                left++;
-            }
+            }else if (array[right] == val) {
+                right--;
+            } else left++;
         }
-        System.out.printf("Отсортированный массив" + Arrays.toString(array));
+        System.out.println("Отсортированный массив" + Arrays.toString(array));
     }
 }
 

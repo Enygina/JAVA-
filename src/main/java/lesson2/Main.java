@@ -5,7 +5,6 @@ package lesson2;
 
 public class Main {
 
-
     void test1() {
         Scanner lineScanner = new Scanner(System.in);
         int n = -1;
