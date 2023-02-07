@@ -7,9 +7,12 @@ public class EX {
     static String[] solarSystemPlanets = {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
     public static void main(String[] args) {
 //        getRandomTo10();
-        getCountDublePlanet(getRandomListArray(solarSystemPlanets));
-        deletDubleInArrHashSet(getRandomListArray(solarSystemPlanets));
-        deleteDoubleInArrStream(getRandomListArray(solarSystemPlanets));
+//        getCountDublePlanet(getRandomListArray(solarSystemPlanets));
+//        deletDubleInArrHashSet(getRandomListArray(solarSystemPlanets));
+//        deleteDoubleInArrStream(getRandomListArray(solarSystemPlanets));
+        // Задача 1 домашней работы
+        oddNums(rendomList());
+        oddNumsInterator(rendomList());
     }
 
 
@@ -60,6 +63,42 @@ public class EX {
                     .toList();
             System.out.println("Массив без дубликатов:"+listWithoutDuplicates);
         }
+
+
+
+    private static ArrayList<Integer> rendomList(){
+        ArrayList<Integer> rendNums = new ArrayList<Integer>();
+        Random random = new Random();
+
+        for (int i = 0; i < 20; i++) {
+            int val = random.nextInt(0,10);
+            rendNums.add(val);
+        }
+        System.out.println(rendNums);
+        return rendNums;
+    }
+    static void oddNumsInterator(ArrayList<Integer> rendNums){
+        for (Iterator<Integer> iterator = rendNums.iterator(); iterator.hasNext();) {
+            Integer number = iterator.next();
+            if (number % 2 == 0) {
+                iterator.remove();
+            }
+        }
+        System.out.println(rendNums);
+    }
+    static void oddNums(ArrayList<Integer> rendNums){
+                int i = 0;
+        while (i < rendNums.size()) {
+            if (rendNums.get(i) % 2 == 0) {
+                rendNums.remove(i);
+            }
+            else {
+                i++;
+            }
+        }
+        System.out.println(Arrays.toString(rendNums.toArray()));
+
+    }
 }
 
 
