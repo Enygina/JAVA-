@@ -11,8 +11,13 @@ public class EX {
 //        deletDubleInArrHashSet(getRandomListArray(solarSystemPlanets));
 //        deleteDoubleInArrStream(getRandomListArray(solarSystemPlanets));
         // Задача 1 домашней работы
-        oddNums(rendomList());
-        oddNumsInterator(rendomList());
+//        oddNums(getRandomTo10());
+//        oddNumsInterator(getRandomTo10());
+        getMinMaxFromArr(rendomList());
+        getMinMaxInArrCollections(rendomList());
+        getMinMaxInArrSort(rendomList());
+        calculateAverage(rendomList());
+        calculAverage(rendomList());
     }
 
 
@@ -98,6 +103,57 @@ public class EX {
         }
         System.out.println(Arrays.toString(rendNums.toArray()));
 
+    }
+
+    static void getMinMaxFromArr(ArrayList<Integer> arr){
+        int min = arr.get(0);
+        int max = arr.get(0);
+
+        for (int i = 1; i < arr.size(); i++) {
+            if (arr.get(i) < min) {
+                min = arr.get(i);
+            }
+        }
+
+        for (int i = 1; i < arr.size(); i++) {
+            if (arr.get(i) > max) {
+                max = arr.get(i);
+            }
+        }
+
+        // The result will be printed
+        System.out.println("Максимальное : " + max);
+        System.out.println("Минимальное : " + min);
+    }
+    static void getMinMaxInArrCollections(ArrayList<Integer> arr){
+        int max = Collections.max(arr);
+        System.out.println("Максимальное : " + max);
+
+        int min = Collections.min(arr);
+        System.out.println("Минимальное : " + min);
+    }
+    static void getMinMaxInArrSort(ArrayList<Integer> arr){
+        int n = arr.size();
+        Collections.sort(arr);
+
+        int min = arr.get(0);
+        int max = arr.get(n - 1);
+
+        System.out.println("Максимальное : " + max);
+        System.out.println("Минимальное : " + min);
+    }
+     static void calculateAverage(ArrayList<Integer> arr) {
+        System.out.println("Среднее арифметическое: "+arr.stream()
+                .mapToDouble(d -> d)
+                .average()
+                .orElse(0.0));
+    }
+    private static void calculAverage(List<Integer> arr) {
+        double sum = 0;
+        for (Integer mark : arr) {
+            sum += mark;
+        }
+        System.out.println("Среднее арифметическое: "+(sum / arr.size()));
     }
 }
 
