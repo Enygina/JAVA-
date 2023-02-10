@@ -5,25 +5,74 @@ import java.util.*;
 
 public class EX {
     public static void main(String[] args) {
-        ex1();
+//        ex0();
+//        ex1();
     }
+
     private static void ex0() {
 
-       /* Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите строку типа: text~num: ");
-        String str = scanner.nextLine();
-        scanner.close();*/
-        String str = "text ~ 5";
+        String text = inputText();
+        LinkedList<String> list = new LinkedList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        System.out.println(list);
+        parseText(list, text);
+        System.out.println(list);
+        startEndlessСycle(list);
+    }
 
-        str = str.replace(" ", "");
-        String[] words = str.split("~");
-        int num = Integer.parseInt(words[1]);
-        String text = words[0];
+    private static void startEndlessСycle(LinkedList<String> list) {
+        String text = "";
+        while (true){
+            text = inputText();
+            if (text.equals("exit")|| !text.contains("~")){
+                return;
+            }
+            parseText(list,text);
+            System.out.println(list);
+        }
+    }
 
-        List<String> linkedList = new LinkedList<>();
-        linkedList.add(num, words[0]);
+    private static LinkedList parseText(LinkedList<String> list, String text) {
+        String action = "";
+        String index = "";
+        if (!text.contains("~")) {
+            return list;
+        } else {
+            action = text.split("~")[0];
+            index = text.split("~")[1];
+            int ind = 0;
+            try {
+                ind = Integer.parseInt(index);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+            if (ind >= list.size() && ind < 0) {
+                throw new RuntimeException("Выход за пределы листа");
+            }
+            if (action.equals("print")) {
+                System.out.println(list.get(ind));
+                list.remove(ind);
+            } else {
+                list.set(ind, action);
+            }
+        }
+        return list;
+    }
 
-        System.out.println(linkedList);
+    private static String inputText() {
+        String text = "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите запрос: ");
+        try {
+            text = scanner.nextLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return text;
     }
 
     private static void ex1() {
@@ -81,6 +130,7 @@ public class EX {
             }
 
         }
-
     }
 }
+
+
