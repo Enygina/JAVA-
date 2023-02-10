@@ -7,6 +7,61 @@ public class EX {
     public static void main(String[] args) {
 //        ex0();
 //        ex1();
+//        hw1();
+        hw2();
+    }
+
+    /**
+     * Пусть дан LinkedList с несколькими элементами. Реализуйте метод,
+     * который вернет “перевернутый” список.
+     */
+    private static void hw2() {
+        int[] list = {1,2,3,4,5,6,7,8, 9};
+        LinkedList<Integer> linkList = new LinkedList<>();
+
+        for (Integer temp : list) {
+            linkList.add(temp);
+        }
+
+        int temp = 0;
+        while (temp != linkList.size() - 1) {
+            linkList.add(linkList.size()-temp, linkList.getFirst());
+            linkList.removeFirst();
+            temp++;
+        }
+
+
+        System.out.println("linkList = " + linkList);
+    }
+
+    /**
+     Принимает от пользователя строку вида
+     text~num
+     Нужно рассплитить строку по ~, сохранить text в связный список на позицию num.
+     Если введено print~num, выводит строку из позиции num в связном списке и удаляет её из списка.
+     */
+    public static void hw1 () {
+        ArrayList<String> list = new ArrayList<>();
+        ArrayDeque<String> arrayDeque = new ArrayDeque<>();
+        while (true) {
+            String text = inputText();
+            if (text.equalsIgnoreCase("print")) {
+//                for (int i = list.size() - 1; i >= 0; i--) {
+//                    System.out.println(list.get(i));
+//                }
+                for (String s : arrayDeque){
+                    System.out.println(s);
+                }
+            } else if (text.equalsIgnoreCase("revert")) {
+//                list.remove(list.size() - 1);
+                arrayDeque.removeFirst();
+            } else if (text.equalsIgnoreCase("exit")) {
+                break;
+            } else {
+//                list.add(text);
+                arrayDeque.addFirst(text);
+            }
+        }
     }
 
     private static void ex0() {
