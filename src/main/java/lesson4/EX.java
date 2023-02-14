@@ -7,8 +7,8 @@ public class EX {
     public static void main(String[] args) {
 //        ex0();
 //        ex1();
-//        hw1();
-        hw2();
+        hw1();
+//        hw2();
     }
 
     /**
@@ -16,12 +16,8 @@ public class EX {
      * который вернет “перевернутый” список.
      */
     private static void hw2() {
-        int[] list = {1,2,3,4,5,6,7,8, 9};
         LinkedList<Integer> linkList = new LinkedList<>();
-
-        for (Integer temp : list) {
-            linkList.add(temp);
-        }
+        Collections.addAll(linkList, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         int temp = 0;
         while (temp != linkList.size() - 1) {
@@ -41,25 +37,26 @@ public class EX {
      Если введено print~num, выводит строку из позиции num в связном списке и удаляет её из списка.
      */
     public static void hw1 () {
-        ArrayList<String> list = new ArrayList<>();
         ArrayDeque<String> arrayDeque = new ArrayDeque<>();
         while (true) {
             String text = inputText();
-            if (text.equalsIgnoreCase("print")) {
-//                for (int i = list.size() - 1; i >= 0; i--) {
-//                    System.out.println(list.get(i));
-//                }
-                for (String s : arrayDeque){
-                    System.out.println(s);
-                }
-            } else if (text.equalsIgnoreCase("revert")) {
-//                list.remove(list.size() - 1);
-                arrayDeque.removeFirst();
-            } else if (text.equalsIgnoreCase("exit")) {
-                break;
-            } else {
-//                list.add(text);
-                arrayDeque.addFirst(text);
+            switch (text){
+                case "print":
+                    for (String s : arrayDeque){
+                        System.out.println(s);
+                    }
+                case "revert":
+                    if (arrayDeque.size()<1){
+                        System.out.println("Элементов в списке не осталось");
+                }else {
+                        arrayDeque.removeFirst();
+                        System.out.println(arrayDeque);
+                    }
+                case "exit":
+                    break;
+                default:
+                    arrayDeque.addFirst(text);
+                    System.out.println(arrayDeque);
             }
         }
     }
