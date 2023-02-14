@@ -11,6 +11,7 @@ public class Ex5 {
 
     }
 
+
     private static void ex5(String path) {
         StringBuilder sb = new StringBuilder();
         for (String fileName : convertPathToNamesArr(path)) {
